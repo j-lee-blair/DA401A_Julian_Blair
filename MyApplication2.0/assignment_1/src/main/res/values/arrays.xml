@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quotes_array">
+        <item>@string/quote_1</item>
+        <item>@string/quote_2</item>
+        <item>@string/quote_3</item>
+        <item>@string/quote_4</item>
+    </string-array>
+</resources>

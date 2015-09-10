@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Mind Blower</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_Get">Get Quote</string>
+    <string name="action_settings">Settings</string>
+    <string name="displayMsg_btn_Fragment">Press to get today\'s quote!</string>
+    <string name="displayMsg_quote_Fragment">Today\'s quote!</string>
+    <string name="emptyQuote_quote_Fragment">Empty quote</string>
+    <string name="displayMsg_date_quote_Fragment">Today\'s date</string>
+
+
+    <string name="quote_1">“Every act of perception\, is to some degree an act of creation\, and every act of memory is to some degree an act of imagination.”
+― Oliver Sacks\, Musicophilia: La musique\, le cerveau et nous </string>
+    <string name="quote_2">“My religion is nature. That\’s what arouses those feelings of wonder and mysticism and gratitude in me.”
+― Oliver Sacks </string>
+    <string name="quote_3">“If a man has lost a leg or an eye\, he knows he has lost a leg or an eye\; but if he has lost a self—himself—he cannot know it\, because he is no longer there to know it.”
+― Oliver Sacks\, The Man Who Mistook His Wife for a Hat and Other Clinical Tales </string>
+    <string name="quote_4">“We speak not only to tell other people what we think\, but to tell ourselves what we think. Speech is a part of thought.”
+― Oliver Sacks\, Seeing Voices </string>
+
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>
