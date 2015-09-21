@@ -8,10 +8,21 @@ import android.graphics.Bitmap;
 public class Movie {
 
     private String mTitle;
-    private String mDescription;
     private String mReleaseYear;
-    private Bitmap mImage_L;
-    private Bitmap mImage_S;
+    private String mDescription;
+
+    private int mImage_L;
+    private int mImage_S;
+
+    public Movie(String mDescription, int mImage_L, int mImage_S, String mReleaseYear, String mTitle) {
+        this.mDescription = mDescription;
+        this.mImage_L = mImage_L;
+        this.mImage_S = mImage_S;
+        this.mReleaseYear = mReleaseYear;
+        this.mTitle = mTitle;
+    }
+
+
 
     public String getmTitle() {
         return mTitle;
@@ -29,19 +40,19 @@ public class Movie {
         this.mDescription = mDescription;
     }
 
-    public Bitmap getmImage_L() {
+    public int getmImage_L() {
         return mImage_L;
     }
 
-    public void setmImage_L(Bitmap mImage_L) {
+    public void setmImage_L(int mImage_L) {
         this.mImage_L = mImage_L;
     }
 
-    public Bitmap getmImage_S() {
+    public int getmImage_S() {
         return mImage_S;
     }
 
-    public void setmImage_S(Bitmap mImage_S) {
+    public void setmImage_S(int mImage_S) {
         this.mImage_S = mImage_S;
     }
 

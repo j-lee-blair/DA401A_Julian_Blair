@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="movie_array">
-        <item>
+
+
     <array name="cops">
         <!-- String --> <item>Cops</item>
         <!-- String --> <item>2003</item>
@@ -9,9 +9,7 @@
         <!-- int --> <item>@drawable/cops_fanart</item>
         <!-- int --> <item>@drawable/cops_poster</item>
     </array>
-        </item>
 
-    <item>
     <array name="eat_sleep_die">
         <item>Eat Sleep Die</item>
         <item>2012</item>
@@ -19,9 +17,9 @@
         <item>@drawable/eat_sleep_die_fanart</item>
         <item>@drawable/eat_sleep_die_poster</item>
     </array>
-    </item>
 
-    <item>
+
+
     <array name="four_shades_of_brown">
         <item>Four Shades of Brown</item>
         <item>2004</item>
@@ -29,9 +27,9 @@
         <item>@drawable/four_shades_of_brown_fanart</item>
         <item>@drawable/four_shades_of_brown_poster</item>
     </array>
-    </item>
 
-    <item>
+
+
     <array name="haxan">
         <item>Häxan: Witchcraft Through the Ages</item>
         <item>1922</item>
@@ -39,9 +37,7 @@
         <item>@drawable/haxan_fanart</item>
         <item>@drawable/haxan_poster</item>
     </array>
-    </item>
 
-    <item>
     <array name="force_majeure">
         <item>Force Majeure</item>
         <item>2014</item>
@@ -49,9 +45,7 @@
         <item>@drawable/force_majeure_fanart</item>
         <item>@drawable/force_majeure_poster</item>
     </array>
-    </item>
 
-    <item>
     <array name="my_life_as_a_dog">
         <item>My Life as a Dog</item>
         <item>1985</item>
@@ -59,9 +53,9 @@
         <item>@drawable/my_life_as_a_dog_fanart</item>
         <item>@drawable/my_life_as_a_dog_poster</item>
     </array>
-    </item>
 
-    <item>
+
+
     <array name="let_the_right_one_in">
         <item>Let the Right One In</item>
         <item>2008</item>
@@ -69,9 +63,9 @@
         <item>@drawable/let_the_right_one_in_fanart</item>
         <item>@drawable/let_the_right_one_in_poster</item>
     </array>
-    </item>
 
-    <item>
+
+
     <array name="persona">
         <item>Persona</item>
         <item>1966</item>
@@ -79,9 +73,9 @@
         <item>@drawable/persona_fanart</item>
         <item>@drawable/persona_poster</item>
     </array>
-    </item>
 
-    <item>
+
+
     <array name="show_me_love">
         <item>Show Me Love</item>
         <item>1998</item>
@@ -89,9 +83,7 @@
         <item>@drawable/show_me_love_fanart</item>
         <item>@drawable/show_me_love_poster</item>
     </array>
-    </item>
 
-    <item>
     <array name="you_the_living">
         <item>You, the Living</item>
         <item>2007</item>
@@ -99,9 +91,7 @@
         <item>@drawable/you_the_living_fanart</item>
         <item>@drawable/you_the_living_poster</item>
     </array>
-    </item>
 
-    <item>
     <array name="movies">
         <item>@array/cops</item>
         <item>@array/eat_sleep_die</item>
@@ -114,6 +104,6 @@
         <item>@array/show_me_love</item>
         <item>@array/you_the_living</item>
     </array>
-    </item>
-    </array>
+
+
 </resources>

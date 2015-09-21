@@ -22,8 +22,8 @@ public class Adapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
 
-    public Adapter(Context context, String[]list){
-        this.mMovieList = new ArrayList<>();
+    public Adapter(Context context, ArrayList<Movie>list){
+        this.mMovieList = new ArrayList<>(list);
         this.mContext = context;
         this.mInflater = LayoutInflater.from(this.mContext);
     }
@@ -52,22 +52,15 @@ public class Adapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.grid_item_layout, parent, false);
         }
 
-        //THE BELOW NEEDS TO WORK FOR US TO SEE THE ITEMS IN A GRID
-
-        ImageView img = (ImageView) convertView.findViewById(R.id.movie_image);
+        ImageView img_L = (ImageView) convertView.findViewById(R.id.movie_image);
         TextView title= (TextView) convertView.findViewById(R.id.movie_title);
         TextView year = (TextView) convertView.findViewById(R.id.movie_year);
 
-        //Förstår inte vad nästa rad är till för. Om man skapar ett objekt av movie måste
-        //man kunna initiera den med info från mMovieList tänker jag men jag har problem
-        //med att få ut datan då den är blandad med en massa annat som en stor string.
-
         Movie movie = (Movie) getItem(position);
 
-        title.setText(movie.getmTitle()); //detta kommer endast fungera om objektet är initierat
-        year.setText(movie.getmReleaseYear()); //samma här
-        //Jag vet inte hur jag ska 'set' img. Fast det ligger en referens i mMovieList ... men
-        //fattar inte hur jag ska komma åt den på ett smidigt sätt.
+        title.setText(movie.getmTitle());
+        year.setText(movie.getmReleaseYear());
+        img_L.setImageResource(movie.getmImage_L());
 
         return convertView;
     }
