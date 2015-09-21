@@ -1,7 +1,5 @@
 package androiddevelopment.assignment_2;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by J on 13/09/2015.
  */
@@ -10,7 +8,6 @@ public class Movie {
     private String mTitle;
     private String mReleaseYear;
     private String mDescription;
-
     private int mImage_L;
     private int mImage_S;
 
@@ -21,8 +18,6 @@ public class Movie {
         this.mReleaseYear = mReleaseYear;
         this.mTitle = mTitle;
     }
-
-
 
     public String getmTitle() {
         return mTitle;
@@ -63,8 +58,4 @@ public class Movie {
     public void setmReleaseYear(String mReleaseYear) {
         this.mReleaseYear = mReleaseYear;
     }
-
-
-
-
 }
