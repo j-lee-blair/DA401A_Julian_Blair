@@ -26,6 +26,7 @@ public class MasterScreen extends Fragment {
 
         Context c = getContext();
 
+        // Byt namn på din typedarray till något annat så den inte heter samma som din arraylist
         TypedArray mMovieList = c.getResources().obtainTypedArray(R.array.movies);
 
 
@@ -40,16 +41,21 @@ public class MasterScreen extends Fragment {
                     mMovieSingle.getResourceId(3,0), //här triggades först error innan. Då använde jag
                                                      //getInt(3) istället dock
                     mMovieSingle.getResourceId(4,0)
-
             ); //Nu ska jag ha ett movieObjekt.
+
+            // lägg till mMovieSingle.recycle();  /Isak
 
             //nu vill jag lägga till den i min vanliga ArrayList<Movie> som är en instansvariabel
             this.mMovieList.add(movie);
-
+            
             //försöker kolla ifall det gick här men kommer inte hit ännu pga errors
+            
+            // Prova kolla utanför loopen / Isak
             Movie m = this.mMovieList.get(0);
             Log.i("MasterScreen: ", movie.getTitle());
         }
+        
+        // lägg till mMovieList.recycle(); / Isak
 
         Adapter adapter = new Adapter(c,this.mMovieList);
         View v = inflater.inflate(R.layout.master_screen, container, false);
