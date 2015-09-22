@@ -33,20 +33,12 @@ public class MasterScreen extends Fragment {
             this.mMovieList.add(movie);
         }
 
-
-
         Adapter adapter = new Adapter(c,this.mMovieList);
         View v = inflater.inflate(R.layout.master_screen, container, false);
         GridView grid = (GridView)v.findViewById(R.id.grid_view);
 
-        //Här kopplar jag min adapter till min gridview. Det nämndes att man skulla loop igneom någonting
-        //jag antar att det är en metod i adaptern men jag vet inte riktigt varför så svårt att
-        // greppa poängen.
         grid.setAdapter(adapter);
 
         return v;
-
-        //Här returnerar jag min view. Om jag tar bort raden alla referenser till Adaptern så
-        //set jag fortfarande inte min gridview (jag kunde se den innan fast den var tom).
     }
 }
