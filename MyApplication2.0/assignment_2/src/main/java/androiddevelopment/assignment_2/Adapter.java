@@ -54,9 +54,9 @@ public class Adapter extends BaseAdapter {
 
         Movie movie = getItem(position);
 
-        title.setText(movie.getmTitle());
-        year.setText(movie.getmReleaseYear());
-        img_L.setImageResource(movie.getmImage_L());
+        title.setText(movie.getTitle());
+        year.setText(movie.getReleaseYear());
+        img_L.setImageResource(movie.getImage_L());
 
         return convertView;
     }

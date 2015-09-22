@@ -11,7 +11,8 @@ public class Movie {
     private int mImage_L;
     private int mImage_S;
 
-    public Movie(String mDescription, int mImage_L, int mImage_S, String mReleaseYear, String mTitle) {
+    public Movie(String mTitle, String mReleaseYear, String mDescription,
+                 int mImage_S, int mImage_L) {
         this.mDescription = mDescription;
         this.mImage_L = mImage_L;
         this.mImage_S = mImage_S;
@@ -19,43 +20,22 @@ public class Movie {
         this.mTitle = mTitle;
     }
 
-    public String getmTitle() {
-        return mTitle;
-    }
-
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
-
-    public String getmDescription() {
-        return mDescription;
-    }
-
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
-
-    public int getmImage_L() {
-        return mImage_L;
-    }
-
-    public void setmImage_L(int mImage_L) {
-        this.mImage_L = mImage_L;
-    }
-
-    public int getmImage_S() {
-        return mImage_S;
-    }
-
-    public void setmImage_S(int mImage_S) {
-        this.mImage_S = mImage_S;
-    }
-
-    public String getmReleaseYear() {
+    public String getTitle() {return mTitle;}
+    protected String getDescription() {return mDescription;}
+    public int getImage_L() {return mImage_L;}
+    public int getImage_S() {return mImage_S;}
+    public String getReleaseYear() {
         return mReleaseYear;
     }
 
-    public void setmReleaseYear(String mReleaseYear) {
-        this.mReleaseYear = mReleaseYear;
+
+    public void setTitle(String mTitle) {this.mTitle = mTitle;}
+    public void setDescription(String mDescription) {this.mDescription = mDescription;}
+    public void setImage_L(int mImage_L) {
+        this.mImage_L = mImage_L;
     }
+    public void setImage_S(int mImage_S) {
+        this.mImage_S = mImage_S;
+    }
+    public void setReleaseYear(String mReleaseYear) {this.mReleaseYear = mReleaseYear;}
 }
