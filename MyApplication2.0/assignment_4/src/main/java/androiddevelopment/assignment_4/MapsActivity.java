@@ -1,22 +1,70 @@
 package androiddevelopment.assignment_4;
 
+import android.location.Location;
+import android.location.LocationListener;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener,
+GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener{
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    GoogleApiClient mGoogleClient;
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        //if this is returned to true then theh default behaviour of the marker click can be changed
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        MarkerClickFragment mDialog = new MarkerClickFragment();
+        mDialog.show(ft, "dialog");
+
+        return false; //the default behaviour will happen if this is false
+    }
+
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.i("MainActivity:", "Connected");
+
+        LocationRequest request = new LocationRequest();
+        request.setInterval(10000);
+        request.setFastestInterval(5000);
+        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleClient, request, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+        mGoogleClient = new GoogleApiClient.Builder(this)
+        .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .build();
+
+        mGoogleClient.connect();
     }
 
     @Override
@@ -61,21 +109,36 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-        //mMap.setMyLocationEnables(true);
-        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMyLocationEnabled(true);
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         //
-        //UISettings settings = mMap.getUISettings();
-        //settings.setZoonControlsEnabled(true);
-        //setting.setMyLocationButtonEnabled(true);
-        //LatLng home = new LatLng(55.61, 13.01);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home));
-        //mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        UiSettings settings = mMap.getUiSettings();
+        settings.setZoomControlsEnabled(true);
+        settings.setMyLocationButtonEnabled(true);
+        LatLng home = new LatLng(55.61, 13.01);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
 
-        //Location myLocation = mMap.getMyLocation();
+        Location myLocation = mMap.getMyLocation();
+
+        //mMap.addMarker(new MarkerOptions().HERE YOU CAN REACH POSITION, HOME, TITLE, and set various values);
+
+        //THIS IS A OOP BUILD PATTERN INSTEAD OF USING CONSTRUCTORS
+        //eg mMap.addMarker(new MarkerOptions()
+        // .title("Malmö)
+        // .snippet("this is mt home")
+        // .icon(BitmapDescriptionFactory.fromResource(R.drawable.enter_the_matrix)
+        // );
+        //
 
 
+        //Listener
+        //mMap.setOnMarkerClickListener(this);
+    }
 
 
-
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.i("MainActivity", "Location:" + location.getLongitude() + "time" + location.getTime());
     }
 }
