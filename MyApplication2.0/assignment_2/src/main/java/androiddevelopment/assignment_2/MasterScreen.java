@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class MasterScreen extends Fragment {
 
-    private ArrayList<Movie> mMovieList;
+    private ArrayList<Movie> mMovieList = new ArrayList<Movie>();
 
 
     @Nullable
@@ -25,31 +25,19 @@ public class MasterScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Context c = getContext();
+        TypedArray mTypedMovieList = c.getResources().obtainTypedArray(R.array.movies);
 
-        TypedArray mMovieList = c.getResources().obtainTypedArray(R.array.movies);
-
-
-        //Här lägger loopar jag igenom en 2 dimensionell array (kan man säga) och skapar movie objekt
-        //Men det står att mitt objekt är null efter att jag skapat den, så det gåt inte att lägga
-        //till det objektet i Arraylist<Movie> ...
-        for (int i = 0; i < mMovieList.length(); i++) {
-            TypedArray mMovieSingle = c.getResources().obtainTypedArray(mMovieList.getResourceId(i,0));
+        for (int i = 0; i < mTypedMovieList.length(); i++) {
+            TypedArray mMovieSingle = c.getResources().obtainTypedArray(mTypedMovieList.getResourceId(i, 0));
             Movie movie = new Movie(mMovieSingle.getString(0),
                     mMovieSingle.getString(1),
                     mMovieSingle.getString(2),
-                    mMovieSingle.getResourceId(3,0), //här triggades först error innan. Då använde jag
-                                                     //getInt(3) istället dock
-                    mMovieSingle.getResourceId(4,0)
-
-            ); //Nu ska jag ha ett movieObjekt.
-
-            //nu vill jag lägga till den i min vanliga ArrayList<Movie> som är en instansvariabel
+                    mMovieSingle.getResourceId(3,0),
+                    mMovieSingle.getResourceId(4,0));
             this.mMovieList.add(movie);
-
-            //försöker kolla ifall det gick här men kommer inte hit ännu pga errors
-            Movie m = this.mMovieList.get(0);
-            Log.i("MasterScreen: ", movie.getTitle());
+            mMovieSingle.recycle();
         }
+        mTypedMovieList.recycle();
 
         Adapter adapter = new Adapter(c,this.mMovieList);
         View v = inflater.inflate(R.layout.master_screen, container, false);

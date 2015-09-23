@@ -1,6 +1,7 @@
 package androiddevelopment.assignment_2;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,6 @@ public class Adapter extends BaseAdapter {
         this.mInflater = LayoutInflater.from(this.mContext);
     }
 
-
     @Override
     public int getCount() {
         return mMovieList.size();
@@ -44,19 +44,24 @@ public class Adapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-
             convertView = mInflater.inflate(R.layout.grid_item_layout, parent, false);
         }
 
-        ImageView img_L = (ImageView) convertView.findViewById(R.id.movie_image);
+        final ImageView img_L = (ImageView) convertView.findViewById(R.id.movie_image);
         TextView title= (TextView) convertView.findViewById(R.id.movie_title);
         TextView year = (TextView) convertView.findViewById(R.id.movie_year);
 
-        Movie movie = getItem(position);
+        final Movie movie = getItem(position);
 
         title.setText(movie.getTitle());
         year.setText(movie.getReleaseYear());
-        img_L.setImageResource(movie.getImage_L());
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                img_L.setImageResource(movie.getImage_L());
+            }
+        });
 
         return convertView;
     }
