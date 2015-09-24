@@ -5,7 +5,8 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,13 @@ import java.util.ArrayList;
 /**
  * Created by J on 13/09/2015.
  */
-public class MasterScreen extends Fragment {
+public class MasterScreen extends Fragment implements View.OnClickListener{
 
-    private ArrayList<Movie> mMovieList = new ArrayList<Movie>();
-
+    private ArrayList<Movie> mMovieList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         Context c = getContext();
         TypedArray mTypedMovieList = c.getResources().obtainTypedArray(R.array.movies);
 
@@ -46,5 +45,15 @@ public class MasterScreen extends Fragment {
         grid.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.main_container, new DetailView());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

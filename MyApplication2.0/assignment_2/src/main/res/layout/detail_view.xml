@@ -1,29 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<RelativeLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-    android:weightSum="1"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/background_material_light">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="240dp"
+            android:adjustViewBounds="true"
             android:id="@+id/movieImg"
-            android:layout_weight="0.86"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/movie_description" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/cops_fanart"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="234dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/movie_description"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="56dp"
+            android:orientation="vertical"
+            android:background="#80000000"
+            android:layout_alignBottom="@+id/movieImg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Title"
+                android:textColor="@android:color/white"
+                android:id="@+id/movie_title"
+                android:layout_alignBottom="@+id/movieImg"
+                android:layout_marginLeft="16dp"
+                android:paddingTop="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Year"
+                android:textColor="@android:color/white"
+                android:id="@+id/movie_year"
+                android:layout_alignBottom="@+id/movieImg"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Here is a bunch of text so you can see how much space it takes up on the screen"
+        android:textColor="@color/bright_foreground_material_light"
+        android:background="@color/background_material_light"
+        android:id="@+id/movie_description"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"/>
+
+    </LinearLayout>
+
+
+
+
+
