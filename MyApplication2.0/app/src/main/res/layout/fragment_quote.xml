@@ -1,0 +1,41 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="androiddevelopment.myapplication.quoteFragment"
+    android:text="@string/app_name"
+    android:rowCount="10"
+    android:columnCount="3">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/displayMsg_quote_Fragment"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/displayMsg_date_quote_Fragment"
+        android:id="@+id/textView_Date"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="384dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/emptyQuote_quote_Fragment"
+        android:id="@+id/textView_Quote"
+        android:layout_row="8"
+        android:layout_column="0"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"/>
+
+</GridLayout>
