@@ -10,13 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import java.util.ArrayList;
 
 /**
  * Created by J on 13/09/2015.
  */
-public class MasterScreen extends Fragment implements View.OnClickListener{
+public class MasterScreen extends Fragment implements AdapterView.OnItemClickListener{
 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
 
@@ -48,7 +49,14 @@ public class MasterScreen extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Movie m = mMovieList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("Title", m.getTitle());
+        bundle.putString("Description", m.getDescription());
+        bundle.putInt("FanArt", m.getImage_S());
+        bundle.putString("Year", m.getReleaseYear());
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
