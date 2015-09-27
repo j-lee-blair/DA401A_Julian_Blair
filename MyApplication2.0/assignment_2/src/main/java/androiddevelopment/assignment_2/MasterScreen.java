@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,13 +45,18 @@ public class MasterScreen extends Fragment implements AdapterView.OnItemClickLis
         GridView grid = (GridView)v.findViewById(R.id.grid_view);
 
         grid.setAdapter(adapter);
+        grid.setOnItemClickListener(this);
 
         return v;
     }
 
+    //Felmeddedelandet som triggas när jag clickar på en gridview Item:
+
+    //Could not find a method OnItemClick(View) in the activity class
+    // androiddevelopment.assignment_2.MainActivity for onClick handler on view class
+    // android.widget.ImageView with id 'movie_image' at android.view.View$1.onClick(View.java:4013)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         Movie m = mMovieList.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("Title", m.getTitle());

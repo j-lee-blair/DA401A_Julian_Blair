@@ -55,13 +55,7 @@ public class Adapter extends BaseAdapter {
 
         title.setText(movie.getTitle());
         year.setText(movie.getReleaseYear());
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                img_L.setImageResource(movie.getImage_L());
-            }
-        });
+        img_L.setImageResource(movie.getImage_L());
 
         return convertView;
     }
