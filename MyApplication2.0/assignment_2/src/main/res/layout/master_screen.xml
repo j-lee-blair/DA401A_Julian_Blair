@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:id="@+id/master_screen">
+
+    <!--tools:context=".MainActivity"-->
 
     <GridView
         android:id="@+id/grid_view"
@@ -16,8 +17,9 @@
         android:numColumns="2"
         android:stretchMode="columnWidth"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:layout_marginBottom="8dp" />
+
+<!--    android:clickable="true"
+    android:focusable="true"-->
 
 </RelativeLayout>

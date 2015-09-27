@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by J on 13/09/2015.
  */
-public class MasterScreen extends Fragment implements AdapterView.OnItemClickListener{
+public class MasterScreen extends Fragment implements AdapterView.OnItemClickListener {
 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
 
@@ -64,9 +64,13 @@ public class MasterScreen extends Fragment implements AdapterView.OnItemClickLis
         bundle.putInt("FanArt", m.getImage_S());
         bundle.putString("Year", m.getReleaseYear());
 
+        // Lägg till bundle-objektet till fragmentet / Isak
+        DetailView detailView = new DetailView();
+        detailView.setArguments(bundle);
+
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.main_container, new DetailView());
+        ft.add(R.id.main_container, detailView); // Lägg till fragmentet och comitta / Isak
         ft.addToBackStack(null);
         ft.commit();
     }

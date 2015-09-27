@@ -28,10 +28,15 @@ public class DetailView extends Fragment {
         TextView textYear = (TextView)v.findViewById(R.id.movie_year);
         TextView textDesc = (TextView)v.findViewById(R.id.movie_description);
 
-        imageView.setImageResource(savedInstanceState.getInt("FanArt"));
-        textTitle.setText(savedInstanceState.get("Title").toString());
-        textYear.setText(savedInstanceState.get("Year").toString());
-        textDesc.setText(savedInstanceState.get("Description").toString());
+        // Hämta bundle-objektet som skapades i föregående fragment / Isak
+        Bundle args = getArguments();
+
+
+        // Använda bundle objektet args för att hämta värden / Isak
+        imageView.setImageResource(args.getInt("FanArt"));
+        textTitle.setText(args.getString("Title"));
+        textYear.setText(args.getString("Year"));
+        textDesc.setText(args.getString("Description"));
 
         return v;
     }
