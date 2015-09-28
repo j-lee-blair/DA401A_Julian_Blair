@@ -16,8 +16,6 @@ import java.util.ArrayList;
  */
 public class QuoteFragment extends Fragment {
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +32,4 @@ public class QuoteFragment extends Fragment {
 
         return v;
     }
-
-
-
-
 }
