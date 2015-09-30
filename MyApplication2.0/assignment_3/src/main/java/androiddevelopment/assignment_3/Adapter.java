@@ -37,7 +37,7 @@ public class Adapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.quote_item, parent, false);
+            convertView = mInflater.inflate(R.layout.fragment_quote, parent, false);
         }
 
         TextView textViewText = (TextView) convertView.findViewWithTag(R.string.quote_text);

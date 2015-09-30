@@ -17,21 +17,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by J on 21/09/2015.
  */
-public class QuoteFragment extends Fragment {
+public class QuoteFragment extends Fragment implements View.OnClickListener{
 
-    ArrayList<String> quoteList;
+    private ArrayList<String> quoteList;
+    private View view;
+    private DownloadTask task;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        task = new DownloadTask();
+        view = getView();
         Context c = getContext();
-
         quoteList = new ArrayList<>();
 
         Adapter adapter = new Adapter(c, quoteList);
@@ -43,31 +47,33 @@ public class QuoteFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onClick(View v) {
+            URL url = null;
+            try {
+                url = new URL("https://api.github.com/zen?access_token=0f892e365071c7e778a020e463d715b8ccb816f5");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            new DownloadTask().execute(url);
+    }
+
     private class DownloadTask extends AsyncTask<URL, ProgressBar, String> {
 
-        ProgressBar pBar;
-
-        public void SetProgressBar(ProgressBar bar){
-            this.pBar = bar;
-        }
-
-        @Override
-        protected void onProgressUpdate(ProgressBar... values) {
-            super.onProgressUpdate(values);
-            if(this.pBar !=null){
-                pBar.setProgress(values[0]);
-            }
-        }
+        private ProgressBar pBar = (ProgressBar) view.findViewById(R.id.mProgressBar);
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            if(this.pBar !=null){
+                pBar.setVisibility(view.VISIBLE);
+            }
         }
 
         @Override
         protected void onPostExecute(String quote) {
             super.onPostExecute(quote);
+            quoteList.add(quote);
         }
 
         @Override
