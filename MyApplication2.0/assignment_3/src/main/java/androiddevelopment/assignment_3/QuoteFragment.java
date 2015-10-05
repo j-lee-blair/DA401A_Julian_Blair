@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -30,31 +31,31 @@ import java.util.ArrayList;
 public class QuoteFragment extends Fragment implements View.OnClickListener{
 
     private ArrayList<String> quoteList;
-    private DownloadTask task;
     private ProgressBar pBar; //this belongs to the fragment so finding it with View only works
                               //in this class
     private String TAG = "QuoteFragment";
+    private ListView listView;
+    private Adapter adapter;
+    private TextView textView;
+    private String quote;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         Context c = getContext();
         quoteList = new ArrayList<>();
-
-        Adapter adapter = new Adapter(c, quoteList);
+        adapter = new Adapter(c, quoteList);
         View view = inflater.inflate(R.layout.fragment_quote, container, false);
 
-        ListView listView = (ListView) view.findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.listView);
+        textView = (TextView) view.findViewWithTag(R.string.quote_text);
+        listView.smoothScrollToPosition(quoteList.size() -1);
+
         FloatingActionButton btn = (FloatingActionButton)view.findViewById(R.id.mFloatingActionBar);
         this.pBar = (ProgressBar) view.findViewById(R.id.mProgressBar);
 
-        task = new DownloadTask(this.pBar);
-
-        listView.setAdapter(adapter);
         btn.setOnClickListener(this);
-
 
         return view;
     }
@@ -65,23 +66,25 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
             URL url = null;
             try {
                 Log.i(TAG, "Try create URL");
-                url = new URL("https://api.github.com/zen?access_token=0f892e365071c7e778a020e463d715b8ccb816f5");
+                url = new URL("https://api.github.com/zen?access_token=d793d7ad4c8b8483fc7fb9a2d4d761dedc1ba815");
             } catch (MalformedURLException e) {
                 Log.i(TAG, "URL creation error");
                 e.printStackTrace();
             }
             Log.i(TAG, "Try create DownloadTask");
-            new DownloadTask(this.pBar).execute(url);
-            Log.i(TAG, "creation success");
+            new DownloadTask(this.pBar, this.textView).execute(url);
+            Log.i(TAG, "DownloadTask creation success");
     }
 
     private class DownloadTask extends AsyncTask<URL, ProgressBar, String> {
 
-        ProgressBar pBar;
-        String TAG = "DownloadTask";
+        private ProgressBar pBar;
+        private TextView textView;
+        private String TAG = "DownloadTask";
 
-        public DownloadTask(ProgressBar pBar){
+        public DownloadTask(ProgressBar pBar, TextView textView){
             this.pBar = pBar;
+            this.textView = textView;
         }
 
 
@@ -100,7 +103,18 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
         protected void onPostExecute(String quote) {
             super.onPostExecute(quote);
             quoteList.add(quote);
-            Log.i(this.TAG, "quoteList count after add: " + quoteList.size());
+
+            if(this.pBar !=null){
+                View view = getView();
+                Log.i(this.TAG, "Try set pBar visibility");
+                pBar.setVisibility(view.INVISIBLE);
+                Log.i(this.TAG, "pBar invisibiltiy set");
+
+                Log.i(this.TAG, "try set listView item text");
+
+                textView.setText(quote);
+                listView.setAdapter(adapter);
+            }
         }
 
         @Override
@@ -122,9 +136,6 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
             return null;
         }
 
-        //FANCY THING DON'T FORGET!!!
-
-        //NAMEOFLIST.smoothScrollToPosition(LISTOFQUOTENAME.size() - 1);
 
         private String getQuote(InputStream stream) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
@@ -139,7 +150,7 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
                 e.printStackTrace();
             }
 
-            Log.i(this.TAG, "read data success");
+            Log.i(this.TAG, "read data from stream success");
             return line;//invoke a method that takes in json as a parameter and converts it to a list of book
                         // this list can then be returned from this method
         }
