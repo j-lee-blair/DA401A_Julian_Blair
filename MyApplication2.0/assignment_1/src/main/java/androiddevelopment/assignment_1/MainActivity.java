@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.main_container, new button_Fragment());
         ft.commit();
-
-
     }
 
     @Override
