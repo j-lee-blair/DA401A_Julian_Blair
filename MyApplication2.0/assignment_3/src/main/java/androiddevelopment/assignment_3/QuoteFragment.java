@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,7 +69,7 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
             URL url = null;
             try {
                 Log.i(TAG, "Try create URL");
-                url = new URL("https://api.github.com/zen?access_token=d793d7ad4c8b8483fc7fb9a2d4d761dedc1ba815");
+                url = new URL("http://api.icndb.com/jokes/random");
             } catch (MalformedURLException e) {
                 Log.i(TAG, "URL creation error");
                 e.printStackTrace();
@@ -102,19 +105,34 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
         @Override
         protected void onPostExecute(String quote) {
             super.onPostExecute(quote);
-            quoteList.add(quote);
 
-            if(this.pBar !=null){
+            Log.i(this.TAG, "Try to create json Object");
+            try {
+                JSONObject jObj = new JSONObject(quote).getJSONObject("value");
+                Log.i(this.TAG, "created json obj");
+                String temp = jObj.getString("joke");
+                Log.i(this.TAG, "got string from json obj");
+                quoteList.add(temp);
+                Log.i(this.TAG, "added json object to list");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.i(this.TAG, "created json obj: failed");
+            }
+
+            Log.i("PostExecute: ", "\"" + quote + "\"");
+
+            if(this.pBar !=null) {
                 View view = getView();
                 Log.i(this.TAG, "Try set pBar visibility");
                 pBar.setVisibility(view.INVISIBLE);
                 Log.i(this.TAG, "pBar invisibiltiy set");
+            }
 
-                Log.i(this.TAG, "try set listView item text");
-
-                textView.setText(quote);
+            Log.i(this.TAG, "try set Adapter");
+            if(listView != null){
                 listView.setAdapter(adapter);
             }
+
         }
 
         @Override
@@ -136,22 +154,26 @@ public class QuoteFragment extends Fragment implements View.OnClickListener{
             return null;
         }
 
-
+        //This is where the code breaks!
         private String getQuote(InputStream stream) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
             try {
                 Log.i(this.TAG, "Try read data from stream");
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
+                    if(line != null){
+                        Log.i(this.TAG, "read data from stream success");
+                    }
+                    else Log.i(this.TAG, "line is null");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.i(this.TAG, "reader error");
             }
 
-            Log.i(this.TAG, "read data from stream success");
-            return line;//invoke a method that takes in json as a parameter and converts it to a list of book
+            return sb.toString();//invoke a method that takes in json as a parameter and converts it to a list of book
                         // this list can then be returned from this method
         }
     }

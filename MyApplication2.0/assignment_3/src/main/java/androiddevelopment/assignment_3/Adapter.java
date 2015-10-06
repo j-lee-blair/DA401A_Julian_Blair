@@ -1,6 +1,7 @@
 package androiddevelopment.assignment_3;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +38,14 @@ public class Adapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.fragment_quote, parent, false);
+            convertView = mInflater.inflate(R.layout.list_item, parent, false);
         }
 
-        TextView textViewText = (TextView) convertView.findViewWithTag(R.string.quote_text);
+        TextView textViewText = (TextView) convertView.findViewById(R.id.textView);
 
         String text = getItem(position);
 
+        Log.i("END: ", "\"" + text + "\"");
         textViewText.setText(text);
 
         return convertView;
