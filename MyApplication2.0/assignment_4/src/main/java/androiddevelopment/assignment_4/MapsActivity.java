@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,12 +23,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener{
 
     GoogleApiClient mGoogleClient;
+    private GoogleMap mMap;
 
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        //if this is returned to true then theh default behaviour of the marker click can be changed
-
+        //if this is returned to true then the default behaviour of the marker click can be changed
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         MarkerClickFragment mDialog = new MarkerClickFragment();
         mDialog.show(ft, "dialog");
@@ -51,7 +52,7 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
     public void onConnectionSuspended(int i) {
 
     }
-    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,29 +112,27 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        //
+
+
         UiSettings settings = mMap.getUiSettings();
         settings.setZoomControlsEnabled(true);
         settings.setMyLocationButtonEnabled(true);
-        LatLng home = new LatLng(55.61, 13.01);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
+        LatLng school = new LatLng(55.6091033,12.9938554);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(school));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
 
         Location myLocation = mMap.getMyLocation();
 
-        //mMap.addMarker(new MarkerOptions().HERE YOU CAN REACH POSITION, HOME, TITLE, and set various values);
-
         //THIS IS A OOP BUILD PATTERN INSTEAD OF USING CONSTRUCTORS
-        //eg mMap.addMarker(new MarkerOptions()
-        // .title("Malmö)
-        // .snippet("this is mt home")
-        // .icon(BitmapDescriptionFactory.fromResource(R.drawable.enter_the_matrix)
-        // );
-        //
-
+        mMap.addMarker(new MarkerOptions()
+                .position(school)
+                .title("Niagara")
+                .snippet("this is where I study how to become a grownup")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.enter_the_matrix_web)
+        ));
 
         //Listener
-        //mMap.setOnMarkerClickListener(this);
+        mMap.setOnMarkerClickListener(this);
     }
 
 

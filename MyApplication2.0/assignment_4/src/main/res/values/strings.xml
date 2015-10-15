@@ -3,5 +3,10 @@
     <string name="title_activity_maps">Map</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_text">Welcome Hunters!</string>
+    <string name="question_text"></string>
+    <string name="answer1_text"></string>
+    <string name="answer2_text"></string>
+    <string name="answer3_text"></string>
+    <string name="next_location_text"></string>
 </resources>
