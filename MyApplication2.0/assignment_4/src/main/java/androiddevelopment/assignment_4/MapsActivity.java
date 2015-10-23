@@ -1,11 +1,12 @@
 package androiddevelopment.assignment_4;
 
 import android.location.Location;
-import android.location.LocationListener;
+import android.nfc.Tag;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -19,11 +20,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener,
 GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener{
 
-    GoogleApiClient mGoogleClient;
+    private GoogleApiClient mGoogleClient;
     private GoogleMap mMap;
+    private ZoneManager zoneManager;
 
     @Override
     public boolean onMarkerClick(Marker marker) {
@@ -66,6 +71,9 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
                 .build();
 
         mGoogleClient.connect();
+
+        zoneManager = new ZoneManager(mMap);
+        Log.i("ZoneManager: ", "ZoneList count: " + zoneManager.getZoneList().size());
     }
 
     @Override
@@ -109,35 +117,59 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
 
         UiSettings settings = mMap.getUiSettings();
         settings.setZoomControlsEnabled(true);
         settings.setMyLocationButtonEnabled(true);
-        LatLng school = new LatLng(55.6091033,12.9938554);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(school));
+
+        Log.i("Main: ", "1");
+
+        MarkerManager mgr = new MarkerManager();
+        Log.i("Main: ", "2");
+        ArrayList<MarkerOptions> markerList = new ArrayList<>(mgr.getList());
+
+        for (int i = 0; i < markerList.size(); i++){
+            Log.i("Main:", "List position " + i + ": " + markerList.get(i).getTitle());
+        }
+
+        Log.i("Main: ", "3");
+
+        LatLng home = markerList.get(1).getPosition();
+        Log.i("Main: ", "4");
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
 
+        Log.i("Main: ", "5");
         Location myLocation = mMap.getMyLocation();
 
-        //THIS IS A OOP BUILD PATTERN INSTEAD OF USING CONSTRUCTORS
-        mMap.addMarker(new MarkerOptions()
-                .position(school)
-                .title("Niagara")
-                .snippet("this is where I study how to become a grownup")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.enter_the_matrix_web)
-        ));
+        Log.i("Main: ", "6");
+        setMarkers(markerList);
 
-        //Listener
+        Log.i("Main: ", "7");
         mMap.setOnMarkerClickListener(this);
+        Log.i("Main: ", "finish");
+    }
+
+    private void setMarkers(ArrayList<MarkerOptions> list){
+        for(int i = 0; i < list.size(); i++){
+            mMap.addMarker(list.get(i));
+        }
     }
 
 
     @Override
     public void onLocationChanged(Location location) {
         Log.i("MainActivity", "Location:" + location.getLongitude() + "time" + location.getTime());
+
+        InZone isInZone = zoneManager.locationIsWithinZone(location);
+
+        if(isInZone !=null){
+            Zone zone = isInZone.getZone();
+            Toast.makeText(MapsActivity.this, "You are now in zone: " + zone.getName(), Toast.LENGTH_SHORT).show();
+        }
+        else Toast.makeText(MapsActivity.this, "Listening... ", Toast.LENGTH_SHORT).show();
     }
 }
