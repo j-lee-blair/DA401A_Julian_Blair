@@ -1,7 +1,6 @@
 package androiddevelopment.assignment_4;
 
 import android.location.Location;
-import android.nfc.Tag;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,7 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener,

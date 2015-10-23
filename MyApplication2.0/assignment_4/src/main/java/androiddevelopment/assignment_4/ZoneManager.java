@@ -3,11 +3,7 @@ package androiddevelopment.assignment_4;
 import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 
-import java.io.IOError;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
