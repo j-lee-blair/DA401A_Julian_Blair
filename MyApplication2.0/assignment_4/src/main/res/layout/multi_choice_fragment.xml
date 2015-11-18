@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/multi_choice_frag">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:text="This is a test question?"
+        android:textSize="18sp"/>
+        <!--android:text="@string/question_text"-->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp">
+    </ListView>
+</LinearLayout>

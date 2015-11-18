@@ -25,7 +25,7 @@ public class MasterScreen extends Fragment implements AdapterView.OnItemClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Context c = getContext();
+        Context c = getContext(); //getContext() belongs to fragments
         TypedArray mTypedMovieList = c.getResources().obtainTypedArray(R.array.movies);
 
         for (int i = 0; i < mTypedMovieList.length(); i++) {
@@ -50,11 +50,6 @@ public class MasterScreen extends Fragment implements AdapterView.OnItemClickLis
         return v;
     }
 
-    //Felmeddedelandet som triggas när jag clickar på en gridview Item:
-
-    //Could not find a method OnItemClick(View) in the activity class
-    // androiddevelopment.assignment_2.MainActivity for onClick handler on view class
-    // android.widget.ImageView with id 'movie_image' at android.view.View$1.onClick(View.java:4013)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Movie m = mMovieList.get(position);

@@ -27,6 +27,7 @@ public class MarkerManager {
         LatLng lilatorg = latLing(55.6045782, 12.9973829);
         LatLng bridge2 = latLing(55.5998191, 12.9996838);
         LatLng church = latLing(55.5936636, 13.002097);
+        LatLng test = latLing(55.610007, 12.997174);
 
         markerList.add(new MarkerOptions()
                 .position(school)
@@ -69,6 +70,13 @@ public class MarkerManager {
                 .snippet("This is where the mission starts")
                 .visible(true)
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.trinity)
+                ));
+        markerList.add(new MarkerOptions()
+                .position(test)
+                .title("PostKontoret")
+                .snippet("")
+                .visible(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.home)
                 ));
     }
 

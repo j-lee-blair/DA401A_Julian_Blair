@@ -15,17 +15,25 @@ public class Zone {
     private Circle radius;
     private GoogleMap mMap;
     private String name;
+    private String message;
+    private String[]choices;
 
+
+    public String getMessage() {return message;}
+    public String[] getChoices() {return choices;}
     public double getLatitude() {return latitude;}
     public double getLongitude() {return longitude;}
     public Circle getCircle() {return radius;}
     public String getName() {return name;}
 
-    public Zone(GoogleMap mMap, double latitude, double longitude, String name) {
+    public Zone(GoogleMap mMap, double latitude, double longitude, String name, String message, Question q ) {
+        this.choices = new String[3];
         this.mMap = mMap;
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
+        this.message = message;
+        this.choices = q.getList();
         this.radius = calculateRadius();
 
     }

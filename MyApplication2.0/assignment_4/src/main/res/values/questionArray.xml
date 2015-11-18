@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="trinity">
+        <item>Take the briefcase</item>
+        <item>Do not take the briefcase</item>
+        <item>@mipmap/trinity</item>
+    </array>
+
+    <array name="briefcase">
+        <item>Open the briefcase and take the blue pill</item>
+        <item>Open the brifcase and take the red pill</item>
+        <item>@mipmap/briefcase</item>
+    </array>
+
+    <array name="bug">
+        <item>Riddle me this</item>
+        <item>Riddle me that</item>
+        <item>Riddle me sideways</item>
+        <item>@mipmap/bug</item>
+    </array>
+
+    <array name="agent">
+        <item>Fight the agent</item>
+        <item>Run away from the agent</item>
+        <item>@mipmap/agent</item>
+    </array>
+
+    <array name="source">
+        <item>Enter the source and help reboot the matrix</item>
+        <item>Do nothing and allow the destruction of the matrix and all mankind</item>
+        <item>@mipmap/source</item>
+    </array>
+
+    <array name="all">
+        <item>@array/trinity</item>
+        <item>@array/briefcase</item>
+        <item>@array/bug</item>
+        <item>@array/agent</item>
+        <item>@array/source</item>
+    </array>
+</resources>
+

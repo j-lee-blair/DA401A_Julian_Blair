@@ -1,5 +1,7 @@
 package androiddevelopment.assignment_4;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -26,6 +28,9 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
     private GoogleApiClient mGoogleClient;
     private GoogleMap mMap;
     private ZoneManager zoneManager;
+    private Bundle mBundle;
+    private Context c;
+    private TypedArray array;
 
     @Override
     public boolean onMarkerClick(Marker marker) {
@@ -33,6 +38,7 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
         //if this is returned to true then the default behaviour of the marker click can be changed
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         MarkerClickFragment mDialog = new MarkerClickFragment();
+        mDialog.setArguments(mBundle);
         mDialog.show(ft, "dialog");
 
         return false; //the default behaviour will happen if this is false
@@ -67,9 +73,11 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
                 .addConnectionCallbacks(this)
                 .build();
 
+
         mGoogleClient.connect();
 
-        zoneManager = new ZoneManager(mMap);
+        Context c = getApplicationContext();
+        zoneManager = new ZoneManager(mMap,c);
         Log.i("ZoneManager: ", "ZoneList count: " + zoneManager.getZoneList().size());
     }
 
@@ -154,6 +162,8 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
         for(int i = 0; i < list.size(); i++){
             mMap.addMarker(list.get(i));
         }
+
+        Log.i("setMarker:", "Markers Set");
     }
 
 
@@ -166,7 +176,22 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
         if(isInZone !=null){
             Zone zone = isInZone.getZone();
             Toast.makeText(MapsActivity.this, "You are now in zone: " + zone.getName(), Toast.LENGTH_SHORT).show();
+            setBundle(zone);
         }
         else Toast.makeText(MapsActivity.this, "Listening... ", Toast.LENGTH_SHORT).show();
     }
+
+    private void setBundle(Zone z){
+        mBundle = new Bundle();
+        mBundle.putString("Title", z.getName());
+        mBundle.putString("Message", z.getMessage());
+        mBundle.putStringArray("Choices", z.getChoices());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mGoogleClient.disconnect();
+    }
+
 }
