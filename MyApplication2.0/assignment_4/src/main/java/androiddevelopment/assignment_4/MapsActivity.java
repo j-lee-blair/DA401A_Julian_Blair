@@ -186,6 +186,10 @@ GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationLis
         mBundle.putString("Title", z.getName());
         mBundle.putString("Message", z.getMessage());
         mBundle.putStringArray("Choices", z.getChoices());
+
+        for (int i = 0; i < mBundle.getStringArray("choices").length ; i++) {
+            Log.i("bundle array:", mBundle.getStringArray("choices")[i]);
+        }
     }
 
     @Override

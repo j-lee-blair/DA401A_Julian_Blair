@@ -1,5 +1,7 @@
 package androiddevelopment.assignment_4;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -35,7 +37,13 @@ public class Zone {
         this.message = message;
         this.choices = q.getList();
         this.radius = calculateRadius();
+        check();
+    }
 
+    private void check(){
+        for (int i = 0; i < choices.length; i++) {
+            Log.i("Choices Array:", choices[i]);
+        }
     }
 
     //Creates radius based on marker position

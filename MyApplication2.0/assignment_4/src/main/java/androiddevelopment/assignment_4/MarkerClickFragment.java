@@ -43,23 +43,27 @@ public class MarkerClickFragment extends DialogFragment implements Dialog.OnClic
         //You might have to create a class of Question here
         //make an array of the question objects here gotten from your MainActivty
         //CharSequence[] choiceList = {use your ArrayName.property, ArrayName.property};
+
         Bundle args = getArguments();
 
-        //initialize String array with data from TypedArray
-       /* String[] qList = new String[5];
-        for (int i = 0; i < qList.length; i++) {
-            qList[i] = questions.getString(i);
-        }*/
-
-        Log.i("MarkerClickFrag: ", "Getting Bundle...");
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
-                .setSingleChoiceItems(args.getStringArray("choices"), -1, null)
-                .setTitle(args.getString("Title"))
-                .setMessage(args.getString("Message"))
+        if (args != null) {
+            Log.i("MarkerClickFrag: ", "Getting Bundle...");
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                    .setSingleChoiceItems(args.getStringArray("choices"), -1, null)
+                    .setTitle(args.getString("Title"))
+                    .setMessage(args.getString("Message"))
+                    .setPositiveButton("OK", this)
+                    .setNegativeButton("Cancel", this);
+            Log.i("MarkerClickFrag: ", "Get Bundle complete");
+            return dialog.create();
+        } else{
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Error")
+                .setMessage("Wait until you're in the zone!")
                 .setPositiveButton("OK", this)
                 .setNegativeButton("Cancel", this);
-        Log.i("MarkerClickFrag: ", "Get Bundle complete");
-        return dialog.create();
+            return dialog.create();
+        }
     }
 
     @Override
@@ -72,8 +76,5 @@ public class MarkerClickFragment extends DialogFragment implements Dialog.OnClic
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-
-
     }
 }
